@@ -1,11 +1,9 @@
 import requests
-import dotenv
 import os
-
-dotenv.load_dotenv()
+import streamlit as st
 
 API_URL = "https://api-inference.huggingface.co/models/mistralai/Mistral-7B-Instruct-v0.3"
-headers = {"Authorization": "Bearer " + os.getenv("HF_API_KEY")}
+headers = {"Authorization": "Bearer " + st.secrets['HF_API_KEY']}
 
 def get_topics(q):
 	payload = {

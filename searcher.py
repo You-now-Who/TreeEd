@@ -1,4 +1,6 @@
 from googlesearch import search
+import search_google.api
+import streamlit as st
 
 def search_youtube(query, num_results):
     search_query = query + ' site:youtube.com'
@@ -13,8 +15,13 @@ def search_youtube(query, num_results):
 def search_google(query, num_results):
     results = []
     
-    for url in search(query, num_results=num_results):
-        results.append(url)
+    try:
+        for url in search(query, num_results=num_results):
+            results.append(url)
+    except Exception as e:
+        # results = search_google.api.results(query, num_results)
+        st.write("Error, API limit exceeded. Please try again later.")
+        return None
     
     return results
 
